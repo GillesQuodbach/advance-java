@@ -10,7 +10,7 @@ public class TestThread extends Thread {
 		for (int i = 0;i<5;i++) {
 			System.out.print(this.getName());
 		}
-		System.out.println("***");
+		System.out.println();
 	}
 	
 	public static void main(String[] args) {
