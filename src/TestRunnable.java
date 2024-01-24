@@ -16,7 +16,6 @@ public class TestRunnable implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		
 Thread thread = new Thread(new TestRunnable());
 thread.start();
 	}
