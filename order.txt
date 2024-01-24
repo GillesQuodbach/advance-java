@@ -1,8 +1,14 @@
-****************Résumé de la commande N01********************
+****************Résumé de la commande N1********************
 SALADE
 POULET
 RIZ
 EAU PLATE
-TARTE MAISON
+
+
+****************Résumé de la commande N2********************
+SOUPE
+BOEUF
+PATES
+EAU GAZEUSE
 
 
