@@ -48,7 +48,7 @@ public class TestRestoV32 {
 		listeDesserts.add(new Dish("MOUSSE AU CHOCOLAT", 10.0));
 		listeDesserts.add(new Dish("TIRAMISU", 10.0));
 		listeDesserts.add(new Dish("AUCUN", 10.0));
-		System.out.println("********TEST ENTREE******" + listeEntrees.get(0));
+
 
 		int choixEntree = 0;
 		int choixPlats = 0;
@@ -136,9 +136,14 @@ public class TestRestoV32 {
 					listeDesserts.get(choixDesserts - 1) };
 
 			choicesList.put(i + 1, orderToAdd);
-for(int index = 0; index < orderToAdd.length;index++) {
-	System.out.println("********" + orderToAdd[i]);
-}
+			
+			for (Map.Entry<Integer, Dish[]> entry : choicesList.entrySet()) {
+				int orderNbr = entry.getKey();
+				Dish[] orderedDish = entry.getValue();
+				orderedDish.getClass();
+				System.out.println("OrderNbr = " + orderNbr + ", order = " + Arrays.toString(orderedDish));
+			}
+
 			// Exercice 3.1 => fichier menu
 
 			BufferedWriter writer = null;
@@ -146,15 +151,25 @@ for(int index = 0; index < orderToAdd.length;index++) {
 				writer = new BufferedWriter(new FileWriter("order.txt"));
 
 				for (Entry<Integer, Dish[]> entry : choicesList.entrySet()) {
+					double totalPrice = 0;
 					int orderNbr = entry.getKey();
-					Dish[] values = entry.getValue();
+					Dish[] orderedDishes = entry.getValue();
+			
 					writer.write("****************Résumé de la commande N" + orderNbr + "********************");
 					writer.write("\n");
-					writer.write(values[0] + "\n");
-					writer.write(values[1] + "\n");
-					writer.write(values[2] + "\n");
-					writer.write(values[3] + "\n");
+					for (Dish dish : orderedDishes) {
+						totalPrice += dish.getCost();
+						writer.write(dish + "\n");
+					}
+					writer.write("\n" + "Prix total = " + totalPrice + " €" + "\n");
+
 					writer.write("\n\n");
+//					writer.write("\n");
+//					writer.write(values[0] + "\n");
+//					writer.write(values[1] + "\n");
+//					writer.write(values[2] + "\n");
+//					writer.write(values[3] + "\n");
+//					writer.write("\n\n");
 				}
 
 			} catch (Exception e) {
