@@ -5,64 +5,55 @@ import java.io.FileWriter;
 import java.util.*;
 import java.util.Map.Entry;
 
-
 public class TestRestoV32 {
 	public static void main(String[] args) {
-		
-		//Liste des choix des clients
+
+		// Liste des choix des clients
 		HashMap<Integer, Dish[]> choicesList = new HashMap<>();
-		
-		//Tableau des plats
+
+		// Tableau des plats
 		List<Dish> listeEntrees = new ArrayList<Dish>();
 		List<Dish> listePlats = new ArrayList<Dish>();
 		List<Dish> listeAccompagnements = new ArrayList<Dish>();
 		List<Dish> listeBoissons = new ArrayList<Dish>();
 		List<Dish> listeDesserts = new ArrayList<Dish>();
-		
-		//Liste des entrée
+
+		// Liste des entrée
 		listeEntrees.add(new Dish("SALADE", 12.0));
 		listeEntrees.add(new Dish("SOUPE", 15.0));
 		listeEntrees.add(new Dish("QUICHE", 13.0));
 		listeEntrees.add(new Dish("AUCUNE", 0.0));
-		//Liste des plats
+		// Liste des plats
 		listePlats.add(new Dish("POULET", 20.0));
 		listePlats.add(new Dish("BOEUF", 30.0));
 		listePlats.add(new Dish("POISSON", 35.0));
 		listePlats.add(new Dish("VEGETARIEN", 25.0));
 		listePlats.add(new Dish("VEGAN", 50.0));
 		listePlats.add(new Dish("AUCUN", 0.0));
-		//Les des accompagnements
+		// Les des accompagnements
 		listeAccompagnements.add(new Dish("RIZ", 5.0));
 		listeAccompagnements.add(new Dish("PATES", 5.0));
 		listeAccompagnements.add(new Dish("FRITES", 8.0));
 		listeAccompagnements.add(new Dish("LEGUMES", 10.0));
 		listeAccompagnements.add(new Dish("AUCUN", 0.0));
-		//Liste des boissons
+		// Liste des boissons
 		listeBoissons.add(new Dish("EAU PLATE", 5.0));
 		listeBoissons.add(new Dish("EAU GAZEUSE", 6.0));
 		listeBoissons.add(new Dish("SODA", 5.0));
 		listeBoissons.add(new Dish("VIN", 8.0));
 		listeBoissons.add(new Dish("AUCUN", 0.0));
-		//Liste des desserts
+		// Liste des desserts
 		listeDesserts.add(new Dish("TARTE MAISON", 10.0));
 		listeDesserts.add(new Dish("MOUSSE AU CHOCOLAT", 10.0));
 		listeDesserts.add(new Dish("TIRAMISU", 10.0));
 		listeDesserts.add(new Dish("AUCUN", 10.0));
 
-
+		//Choix client
 		int choixEntree = 0;
 		int choixPlats = 0;
 		int choixAccompagnements = 0;
 		int choixBoissons = 0;
 		int choixDesserts = 0;
-
-		boolean isChoixEntreeCorrect = false;
-		boolean isChoixPlats = true;
-		boolean isChoixAccompagnements = true;
-		boolean isChoixBoissons = true;
-		boolean isChoixDesserts = true;
-
-		int counter = 0;
 
 		System.out.println("bonjour, combien de menus souhaitez vous ?");
 
@@ -71,8 +62,6 @@ public class TestRestoV32 {
 		int numberOfMenu = scan.nextInt();
 
 		for (int i = 0; i < numberOfMenu; i++) {
-
-			int key = i + 1;
 
 			System.out.println("Commande numéro " + (i + 1));
 
@@ -136,42 +125,45 @@ public class TestRestoV32 {
 					listeDesserts.get(choixDesserts - 1) };
 
 			choicesList.put(i + 1, orderToAdd);
-			
-			for (Map.Entry<Integer, Dish[]> entry : choicesList.entrySet()) {
-				int orderNbr = entry.getKey();
-				Dish[] orderedDish = entry.getValue();
-				orderedDish.getClass();
-				System.out.println("OrderNbr = " + orderNbr + ", order = " + Arrays.toString(orderedDish));
-			}
+
+//			for (Map.Entry<Integer, Dish[]> entry : choicesList.entrySet()) {
+//				int orderNbr = entry.getKey();
+//				Dish[] orderedDish = entry.getValue();
+//				orderedDish.getClass();
+//				System.out.println("OrderNbr = " + orderNbr + ", order = " + Arrays.toString(orderedDish));
+//			}
 
 			// Exercice 3.1 => fichier menu
 
 			BufferedWriter writer = null;
 			try {
+				double totalOrderPrice = 0;
 				writer = new BufferedWriter(new FileWriter("order.txt"));
 
 				for (Entry<Integer, Dish[]> entry : choicesList.entrySet()) {
-					double totalPrice = 0;
+					double orderPrice = 0;
+
 					int orderNbr = entry.getKey();
 					Dish[] orderedDishes = entry.getValue();
-			
+
 					writer.write("****************Résumé de la commande N" + orderNbr + "********************");
 					writer.write("\n");
 					for (Dish dish : orderedDishes) {
-						totalPrice += dish.getCost();
+						// Order price
+						orderPrice += dish.getCost();
+						// Total ordered price
+
 						writer.write(dish + "\n");
 					}
-					writer.write("\n" + "Prix total = " + totalPrice + " €" + "\n");
 
+					// All order price addition
+					totalOrderPrice += orderPrice;
+
+					writer.write("\n" + "Prix total = " + orderPrice + " €" + "\n");
 					writer.write("\n\n");
-//					writer.write("\n");
-//					writer.write(values[0] + "\n");
-//					writer.write(values[1] + "\n");
-//					writer.write(values[2] + "\n");
-//					writer.write(values[3] + "\n");
-//					writer.write("\n\n");
-				}
 
+				}
+				writer.write("Total des commandes: " + String.valueOf(totalOrderPrice) + " €");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {

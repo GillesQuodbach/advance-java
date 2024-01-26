@@ -5,7 +5,7 @@ PATES: 5.0€
 EAU GAZEUSE: 6.0€
 MOUSSE AU CHOCOLAT: 10.0€
 
-*Prix total = 66.0 €*
+Prix total = 66.0 €
 
 
 ****************Résumé de la commande N2********************
@@ -15,6 +15,7 @@ PATES: 5.0€
 EAU GAZEUSE: 6.0€
 MOUSSE AU CHOCOLAT: 10.0€
 
-*Prix total = 66.0 €*
+Prix total = 66.0 €
 
 
+Total des commandes: 132.0 €
